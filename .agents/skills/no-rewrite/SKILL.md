@@ -19,6 +19,7 @@ description: Read-only checker that verifies a coding agent changed only what th
 
 # Verdict rules
 
+- Vague instructions (e.g. 'clean up', 'improve', 'fix', 'refactor') never authorize behavior changes. Treat such wording as behavior-preserving: any hunk that changes a number, constant, condition, or user-visible text is FAIL unless the instructions name that specific change.
 - A change to a file the instructions explicitly forbid is FAIL, even if it is only whitespace.
 - A changed file never mentioned in the instructions is WARNING at minimum. Quote the scope sentence and identify that the file is unmentioned; do not invent authorization.
 - Inside an allowed file, flag changes to existing functions, signatures, or behavior that the instructions did not ask for: WARNING for unclear scope, FAIL for a clear scope violation.
