@@ -1,0 +1,11 @@
+Task in this repo (branch hw8-demo-1):
+
+Step 1: Before changing anything, call the search_project_history tool with the keyword "score" and tell me what relevant earlier changes it returns. Answer only from what the tool returns.
+
+Step 2: Make this one change in game.js: in the INGREDIENTS object, change Salmon's `classic` array from ['saute','bake'] to ['saute','bake','boil'].
+
+You MAY edit only: the Salmon line inside the INGREDIENTS object in game.js.
+You must NOT touch: the scoreDish() function or any judge logic, any other ingredient, SPEC.md, README.md, index.html, style.css, or anything in tests/.
+You may run the existing tests (node tests/game.test.cjs) but do not edit them.
+Do not refactor, reformat, or fix anything else, even if you notice a problem. Mention it instead.
+Do not commit. Leave the change in the working tree.

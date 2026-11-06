@@ -1,0 +1,10 @@
+Task in this repo (branch hw8-demo-2):
+
+Step 1: Before changing anything, call the search_project_history tool with the keyword "knife work" and tell me what relevant earlier changes it returns. Answer only from what the tool returns.
+
+Step 2: In game.js, inside scoreDish(), change the string 'No knife work on this plate.' to 'No prep work on this plate.'
+
+You MAY edit only: that one string in game.js.
+You must NOT touch: anything in tests/, SPEC.md, README.md, index.html, style.css, any other judge's text, or any scoring formula.
+Run the existing tests (node tests/game.test.cjs). If any test fails because of this change, do NOT fix or edit it. Just tell me which test failed and why.
+Do not refactor, reformat, or fix anything else. Do not commit. Leave the change in the working tree.

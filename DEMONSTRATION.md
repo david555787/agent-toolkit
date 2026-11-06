@@ -4,12 +4,16 @@
 
 I made one small change on each of two branches, `hw8-demo-1` and `hw8-demo-2`, of my Mystery Kitchen game repository (`inherited-game`). Every session was started from the `agent-toolkit` project and worked on the game repository through absolute paths. Before each change the agent searched my project history with the MCP tool. After each change I used the `no-rewrite` checker in a separate, fresh session to check the scope of the change. The coding agent used GPT-6.1 Sol and the checker used GPT-6 Luna.
 
-The tool-call evidence below is not shown directly in the Codex interface. After each task, I asked the agent in the same session to show the exact arguments and the raw text the tool returned.
+The tool-call evidence below is not shown directly in the Codex interface. After each task, I asked the agent in the same session to show the exact arguments and the raw text the tool returned. These saved responses are retrospective agent reports, not direct tool-event logs. The tool is `search_project_history`. The original task prompts and saved responses are included in `evidence/`; the links below preserve this distinction.
 
 ## Run 1
+
+Source records: [original task prompt](evidence/run1-promptA.txt) and [saved agent response about the tool call](evidence/run1-sessionA-toolcall.txt).
+
 The agent's tool call, which I asked it to show after the task finished:
 
 ```
+Tool: search_project_history
 Arguments: {"keyword":"score"}
 
 Returned (first entry, truncated):
@@ -48,9 +52,12 @@ My notes on Run 1: I asked the agent to search for `score`, then add `'boil'` to
 
 ## Run 2
 
+Source records: [original task prompt](evidence/run2-promptA.txt) and [saved agent response about the tool call](evidence/run2-sessionA-toolcall.txt).
+
 I asked the agent (GPT-6.1 Sol) to search the history for `knife work`, then change one feedback string in `scoreDish()` from `No knife work on this plate.` to `No prep work on this plate.` without touching `tests/`. As in Run 1, I asked it to show its tool call after it finished. The call and the first returned entry:
 
 ```
+Tool: search_project_history
 Arguments: {"keyword":"knife work"}
 
 Returned (first entry, truncated):
@@ -97,3 +104,25 @@ I compared both diffs myself and found no extra out-of-scope changes. A PASS onl
 I also built three cases on purpose: I edited the test file by hand, I added a scoring-formula change inside `game.js` next to the allowed string change, and I gave the checker no original instructions. The checker returned FAIL, FAIL and CANNOT JUDGE, as expected. The vague-instruction case ("Clean up the scoring code in game.js.") is described in ITERATION.md.
 
 Both real tasks were small, and I did not run a comparison without the history search. So these runs cannot show that the history search improved the result, or that the checker handles larger changes reliably.
+
+## Earlier prompt-log evidence
+
+The following excerpts are copied from earlier project logs. They document repeated scope restrictions; they do not establish that an agent violated those restrictions. Source locations identify the original repository, file, and section.
+
+- `inherited-game/prompt_log.md`, "Prompt 1: shuffle fix":
+
+  > Replace only its implementation with a Fisher-Yates shuffle.
+  > It must keep the same function name, signature and return type
+  > (a new shuffled array; do not mutate the input if the original didn't).
+
+- `inherited-game/prompt_log.md`, "Prompt 2: instructions visible by default":
+
+  > Do not change the instruction wording.
+
+- `liar-minesweeper/prompt_log.md`, "Step 2: board logic and tests":
+
+  > Read SPEC.md first (do not edit it), then js/board.js. Keep the existing file structure, function names and signatures from the skeleton. Do not rename anything or rewrite other files.
+
+These restrictions correspond to the checker's file-scope and behavior-preservation checks. The history tool exposes structured records from these earlier projects; its index contains commit messages, changed file names, and diff summaries. All current `prompt_log_excerpt` values are null, so the tool cannot supply documented reasons from those logs.
+
+**Author TODO for README:** In your own words, explain the friction that motivated each tool, cite the relevant excerpts, and distinguish what the logs show from what you remember. The excerpts above support repeated scope restrictions; a specific earlier need to retrieve project history still needs your explanation and supporting log evidence, if available.

@@ -1,0 +1,61 @@
+Yes. Exact arguments:
+
+```json
+{"keyword":"score"}
+```
+
+Raw returned text:
+
+```text
+repo: inherited-game
+short_hash: ad1cfb2
+date: 2026-10-31T11:18:51-04:00
+message: Fix technician judge crediting blended food as knife work
+changed files: game.js, tests/game.test.cjs
+diff summary:
+ game.js             |  4 ++--
+ tests/game.test.cjs | 12 ++++++++++++
+ 2 files changed, 14 insertions(+), 2 deletions(-)
+game.js
+-  const handled=pick(d=>!d.info.prep||d.item.form!=='whole');
++  const handled=pick(d=>d.item.form==='prepped');
+-    `${handled.length} of ${n} ingredient${n>1?'s':''} handled with the right knife work. ${perfect
++    `${handled.length?`${handled.length} of ${n} ingredient${n>1?'s':''} handled with the right kni
+tests/game.test.cjs
++test('technician credits knife work only for prepped ingredients, not directly blended egg',()=>{
++  const run=kitchen(['saute','blend']);
++  run("state.near='mixer'; grab(state.basket[5]); addTo('mixer',state.basket[5]); simulate(5); grab
++  assert.equal(run('state.basket[5].form'),'puree');
++  assert.equal(run("methodsOf(state.basket[5]).join()"),'blend');
++  assert.doesNotMatch(run('scoreDish(state.basket,[]).comments[2]'),[redacted path] knife work/);
++  assert.match(run('scoreDish(state.basket,[]).comments[2]'),[redacted path] knife work on this pla
++  run("grab(state.basket[5]); relocate(state.basket[5],'table'); state.near='prep'; grab(state.bask
+prompt_log_excerpt: no documented reason available
+
+---
+
+repo: inherited-game
+short_hash: eb85eea
+date: 2026-10-31T11:13:23-04:00
+message: Fix traditionalist judge praising burnt food
+changed files: game.js, tests/game.test.cjs
+diff summary:
+ game.js             | 4 ++--
+ tests/game.test.cjs | 8 ++++++++
+ 2 files changed, 10 insertions(+), 2 deletions(-)
+game.js
+-  const classicPick=classic.find(d=>d.quality==='perfect')||classic[0],daringPick=daring[0],sharedP
++  const classicPick=classic.find(d=>d.quality==='perfect')||classic.find(d=>['fresh','warm'].includ
+-    `${classicPick?`${METHODS[classicPick.methods.find(m=>classicPick.info.classic.includes(m))].pa
++    `${classicPick?`${METHODS[classicPick.methods.find(m=>classicPick.info.classic.includes(m))].pa
+tests/game.test.cjs
++test('traditionalist criticises burnt chicken instead of praising its classic method',()=>{
++  const run=kitchen(['saute','bake']);
++  run("Object.assign(state.basket[0],{where:'plate',done:3,sear:3,exposure:{saute:5}})");
++  const comment=run('scoreDish(state.basket,[]).comments[0]');
++  assert.doesNotMatch(comment,[redacted path] is how it should be done/);
++  assert.match(comment,[redacted path] chicken is burnt\. A classic preparation deserves better\./)
++});
++
+prompt_log_excerpt: no documented reason available
+```

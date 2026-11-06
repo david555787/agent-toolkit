@@ -1,0 +1,33 @@
+Yes. Exact arguments:
+
+```json
+{"keyword":"knife work"}
+```
+
+Raw returned text:
+
+```text
+repo: inherited-game
+short_hash: ad1cfb2
+date: 2026-10-31T11:18:51-04:00
+message: Fix technician judge crediting blended food as knife work
+changed files: game.js, tests/game.test.cjs
+diff summary:
+ game.js             |  4 ++--
+ tests/game.test.cjs | 12 ++++++++++++
+ 2 files changed, 14 insertions(+), 2 deletions(-)
+game.js
+-  const handled=pick(d=>!d.info.prep||d.item.form!=='whole');
++  const handled=pick(d=>d.item.form==='prepped');
+-    `${handled.length} of ${n} ingredient${n>1?'s':''} handled with the right knife work. ${perfect
++    `${handled.length?`${handled.length} of ${n} ingredient${n>1?'s':''} handled with the right kni
+tests/game.test.cjs
++test('technician credits knife work only for prepped ingredients, not directly blended egg',()=>{
++  const run=kitchen(['saute','blend']);
++  assert.equal(run('state.basket[5].form'),'puree');
++  assert.equal(run("methodsOf(state.basket[5]).join()"),'blend');
++  assert.doesNotMatch(run('scoreDish(state.basket,[]).comments[2]'),[redacted path] knife work/);
++  assert.match(run('scoreDish(state.basket,[]).comments[2]'),[redacted path] knife work on this pla
++  run("grab(state.basket[5]); relocate(state.basket[5],'table'); state.near='prep'; grab(state.bask
+prompt_log_excerpt: no documented reason available
+```

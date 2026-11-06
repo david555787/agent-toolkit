@@ -1,0 +1,7 @@
+[WARNING] game.js — The instruction “Clean up the scoring code in game.js.” names this file, but the diff at `@@ -667,7 +667,7 @@` changes a scoring weight and at `@@ -677,7 +677,7 @@` changes feedback wording. The request does not clarify whether those behavior and text changes are within scope.
+
+OVERALL: WARNING
+
+Prompt: original instructions given = "Clean up the scoring code in game.js."
+Model: GPT-6 Luna
+Commands run by checker: (1) cat ~/agent-toolkit/.agents/skills/no-rewrite/SKILL.md && git -C ~/inherited-game status ... (2) git -C ~/inherited-game status --short --untracked-files=all && git -C ~/inherited-game diff HEAD --
