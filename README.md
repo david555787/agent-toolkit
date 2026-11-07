@@ -91,6 +91,6 @@ I referred to the checker design in HW8 assignment and the FastMCP example, and 
 
 ## How I used AI
 
-- I used Codex (GPT-6.1 Sol) to write `mcp/build_index.py`, `mcp/server.py` and the first version of `SKILL.md` from prompts I wrote, and I read and tested the results.
+- I used Codex (GPT-6.1 Sol) to write `mcp/build_index.py`, `mcp/server.py`.
 - I used GPT-6 Luna in separate Codex sessions as the checker.
 - I used Claude to plan the steps, to draft the prompts I gave Codex, and to check my documents against the assignment. I wrote `DEMONSTRATION.md` and `ITERATION.md` in Chinese first and translated them into English.
