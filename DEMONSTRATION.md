@@ -124,5 +124,3 @@ The following excerpts are copied from earlier project logs. They document repea
   > Read SPEC.md first (do not edit it), then js/board.js. Keep the existing file structure, function names and signatures from the skeleton. Do not rename anything or rewrite other files.
 
 These restrictions correspond to the checker's file-scope and behavior-preservation checks. The history tool exposes structured records from these earlier projects; its index contains commit messages, changed file names, and diff summaries. All current `prompt_log_excerpt` values are null, so the tool cannot supply documented reasons from those logs.
-
-**Author TODO for README:** In your own words, explain the friction that motivated each tool, cite the relevant excerpts, and distinguish what the logs show from what you remember. The excerpts above support repeated scope restrictions; a specific earlier need to retrieve project history still needs your explanation and supporting log evidence, if available.
